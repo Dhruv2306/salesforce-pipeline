@@ -1,0 +1,25 @@
+name: Auto Create Pull Request
+on:
+  push:
+    # This triggers the workflow every time you push changes to the main branch
+    branches:
+      - main 
+
+jobs:
+  make-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Copies your code from GitHub into the automation runner
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Automatically creates the Pull Request
+      - name: Open Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Updated Apex classes from Sandbox'
+          title: 'Review Apex Changes from Sandbox'
+          body: 'This PR was automatically created because new Apex code was deployed and pushed.'
+          branch: review-sandbox-changes
+          base: main
