@@ -83,4 +83,6 @@ public with sharing class ContactCreationController {
         return newContact.Id;
     }
 }
+
+//test workflow
 // __________________________GenAI: Generated code ends here______________________________
