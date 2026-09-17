@@ -1,19 +1,26 @@
 name: Auto Create Pull Request
 on:
   push:
-    # This triggers the workflow every time you push changes to the main branch
     branches:
       - main 
+
+# This gives the automated script permission to make changes and open PRs
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   make-pull-request:
     runs-on: ubuntu-latest
     steps:
-      # 1. Copies your code from GitHub into the automation runner
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Automatically creates the Pull Request
+      # This creates a dummy change inside the runner to ensure there is something new to put in a PR
+      - name: Simulate Sandbox Change
+        run: |
+          date +%s > sandbox-deploy-timestamp.txt
+
       - name: Open Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
