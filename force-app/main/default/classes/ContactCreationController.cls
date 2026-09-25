@@ -34,6 +34,7 @@ public with sharing class ContactCreationController {
         } catch (DmlException dmlEx) {
             throw new AuraHandledException('Unable to create Contact: ' + dmlEx.getMessage());
         }
+        System.debug('test it');
 
         return newContact.Id;
     }
